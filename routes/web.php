@@ -9,3 +9,6 @@ Route::get('panel', [PanelController::class, 'index']);
 
 Route::get('/promocoes', [SiteController::class,'promotions'])->name('promotions');
 Route::get('/', [SiteController::class,'index'])->name('site.index');
+
+Auth::routes();
+
