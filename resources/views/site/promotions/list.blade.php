@@ -14,15 +14,15 @@
                     <img src="{{url('assets/site/images/buenos_aires.jpg')}}" alt="">
 
                     <div class="legend">
-                        <h1>Brasília</h1>
-                        <h2>Saída: Goiânia</h2>
+                        <h1>João Pessoa</h1>
+                        <h2>Saída: Brasília</h2>
                         <span>Ida e Volta</span>
                     </div>
                 </div>
                 <!--image-promo-->
 
                 <div class="details">
-                    <p>Data: 12/12/2018</p>
+                    <p>Data: 12/12/2023</p>
 
                     <div class="price">
                         <span>R$ 259,00</span>
