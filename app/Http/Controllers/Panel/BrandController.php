@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Panel;
 
 use App\Http\Controllers\Controller;
+use App\Models\Brand;
 use Illuminate\Http\Request;
 
 class BrandController extends Controller
@@ -14,7 +15,9 @@ class BrandController extends Controller
      */
     public function index()
     {
-        return "brands";
+        $title = 'Gestão de Aviões';
+
+        return view('panel.brands.index',  compact('title'));
     }
 
     /**
@@ -24,7 +27,9 @@ class BrandController extends Controller
      */
     public function create()
     {
-        //
+        $title = 'Cadastro de novo avião';
+
+        return view('panel.brands.create',  compact('title'));
     }
 
     /**
@@ -35,7 +40,9 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $dataForm = $request->all();
+        Brand::create($dataForm);
+        return redirect()->route('brands.index');
     }
 
     /**

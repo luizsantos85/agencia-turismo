@@ -6,7 +6,7 @@ use App\Http\Controllers\Panel\BrandController;
 use App\Http\Controllers\Panel\PanelController;
 
 Route::prefix('panel')->group(function(){
-    Route::get('/', [PanelController::class, 'index']);
+    Route::get('/', [PanelController::class, 'index'])->name('panel.index');
     Route::resource('/brands', BrandController::class);
 });
 
