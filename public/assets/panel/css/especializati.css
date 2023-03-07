@@ -148,3 +148,6 @@ h1.title-pg{
     background: #FFF;
     padding: 10px;
 }
+.both{
+    clear: both;
+}

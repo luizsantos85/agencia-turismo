@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class BrandController extends Controller
 {
+    private $brand;
+
+    public function __construct(Brand $brand)
+    {
+        $this->brand = $brand;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,8 +23,9 @@ class BrandController extends Controller
     public function index()
     {
         $title = 'Gestão de Aviões';
+        $brands = $this->brand->all();
 
-        return view('panel.brands.index',  compact('title'));
+        return view('panel.brands.index',  compact('title', 'brands'));
     }
 
     /**
@@ -41,8 +49,13 @@ class BrandController extends Controller
     public function store(Request $request)
     {
         $dataForm = $request->all();
-        Brand::create($dataForm);
-        return redirect()->route('brands.index');
+
+        if ($this->brand->create($dataForm))
+            return redirect()->route('brands.index')
+                ->with('success', 'Cadastro realizado com sucesso.');
+        else
+            return redirect()->back()
+                ->with('error', 'Falha ao cadastrar.');
     }
 
     /**
