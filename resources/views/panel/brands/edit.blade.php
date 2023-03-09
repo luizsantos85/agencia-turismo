@@ -3,7 +3,7 @@
 @section('content')
 <div class="bred">
     <a href="{{route('panel.index')}}" class="bred">Dashboard ></a> <a href="{{route('brands.index')}}"
-        class="bred">Marcas ></a> <a href="{{route('brands.create')}}" class="bred">Cadastrar</a>
+        class="bred">Marcas ></a> <a href="{{route('brands.edit', $brand->id)}}" class="bred">Editar</a>
 </div>
 
 
@@ -14,10 +14,12 @@
 
     @include('panel.layouts.alerts')
 
-    <form class="form form-search form-ds" action="{{route('brands.store')}}" method="POST">
+    <form class="form form-search form-ds" action="{{route('brands.update', $brand->id)}}" method="POST">
+        @method('PUT')
         @csrf
         <div class="form-group">
-            <input type="text" name="name" placeholder="Nome:" class="form-control" value="{{old('name')}}">
+            <input type="text" name="name" placeholder="Nome:" class="form-control" value="{{$brand->name}}">
+            {{-- <input type="hidden" name="id" value="{{$brand->id}}"> --}}
         </div>
 
         <div class="form-group">

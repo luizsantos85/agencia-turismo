@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Panel;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\BrandStoreUpdateFormRequest;
 use App\Models\Brand;
 use Illuminate\Http\Request;
 
@@ -46,7 +47,7 @@ class BrandController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BrandStoreUpdateFormRequest $request)
     {
         $dataForm = $request->all();
 
@@ -77,7 +78,14 @@ class BrandController extends Controller
      */
     public function edit($id)
     {
-        //
+        $brand = $this->brand->find($id);
+
+        if(!$brand)
+            return redirect()->back()->with('error', 'Id não encontrado.');
+
+        $title = "Editar avião: {$brand->name}";
+
+        return view('panel.brands.edit', compact('title','brand'));
     }
 
     /**
@@ -87,9 +95,21 @@ class BrandController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(BrandStoreUpdateFormRequest $request, $id)
     {
-        //
+        $dataForm = $request->all();
+        $brand = $this->brand->find($id);
+
+        if (!$brand)
+            return redirect()->back()->with('error', 'Id não encontrado.');
+
+        if ($brand->update($dataForm))
+            return redirect()->route('brands.index')
+            ->with('success', 'Avião atualizado com sucesso.');
+        else
+            return redirect()->back()
+                ->with('error', 'Falha ao editar.');
+
     }
 
     /**

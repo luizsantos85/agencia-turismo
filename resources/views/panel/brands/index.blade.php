@@ -27,7 +27,6 @@
             <form class="form form-inline">
                 <input type="text" name="nome" placeholder="Nome:" class="form-control">
                 <input type="text" name="email" placeholder="E-mail:" class="form-control">
-
                 <button class="btn btn-search">Pesquisar</button>
             </form>
         </div>
@@ -36,12 +35,14 @@
 
         <table class="table table-striped">
             <tr>
+                <th style="width:100px;">#</th>
                 <th>Nome</th>
                 <th width="150">Ações</th>
             </tr>
 
             @forelse ($brands as $brand)
             <tr>
+                <td>{{$brand->id}}</td>
                 <td>{{$brand->name}}</td>
                 <td>
                     <a href="{{route('brands.edit', $brand->id)}}" class="edit">Edit</a>
