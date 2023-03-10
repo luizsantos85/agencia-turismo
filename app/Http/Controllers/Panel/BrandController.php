@@ -38,7 +38,7 @@ class BrandController extends Controller
     {
         $title = 'Cadastro de novo avião';
 
-        return view('panel.brands.create',  compact('title'));
+        return view('panel.brands.create-edit',  compact('title'));
     }
 
     /**
@@ -85,7 +85,7 @@ class BrandController extends Controller
 
         $title = "Editar avião: {$brand->name}";
 
-        return view('panel.brands.edit', compact('title','brand'));
+        return view('panel.brands.create-edit', compact('title','brand'));
     }
 
     /**
