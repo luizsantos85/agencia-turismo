@@ -45,7 +45,7 @@
                 <td>{{$brand->name}}</td>
                 <td>
                     <a href="{{route('brands.edit', $brand->id)}}" class="btn btn-warning">Edit</a>
-                    <a href="{{route('brands.destroy', $brand->id)}}" class="btn btn-danger">Delete</a>
+                    <a href="{{route('brands.show', $brand->id)}}" class="btn btn-default">Detalhes</a>
                 </td>
             </tr>
             @empty
@@ -55,8 +55,11 @@
             @endforelse
 
         </table>
-
-        {!! $brands->links('pagination::bootstrap-4') !!}
+        @if (isset($dataForm))
+            {!! $brands->appends($dataForm)->links('pagination::bootstrap-4') !!}
+        @else
+            {!! $brands->links('pagination::bootstrap-4') !!}
+        @endif
     </div>
     <!--Content Dinâmico-->
 

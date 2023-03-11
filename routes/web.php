@@ -7,8 +7,8 @@ use App\Http\Controllers\Panel\PanelController;
 
 Route::prefix('panel')->group(function(){
     Route::get('/', [PanelController::class, 'index'])->name('panel.index');
+    Route::any('/brands/search', [BrandController::class,'search'])->name('brands.search');
     Route::resource('/brands', BrandController::class);
-    Route::post('/brands/search', [BrandController::class,'search'])->name('brands.search');
 });
 
 Route::get('/promocoes', [SiteController::class,'promotions'])->name('promotions');

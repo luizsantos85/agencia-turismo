@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class BrandController extends Controller
 {
     private $brand;
-    protected $totalPage = 2;
+    protected $totalPage = 10;
 
     public function __construct(Brand $brand)
     {
@@ -69,7 +69,14 @@ class BrandController extends Controller
      */
     public function show($id)
     {
-        //
+        $brand = $this->brand->find($id);
+
+        if (!$brand)
+            return redirect()->back()->with('error', 'Id não encontrado.');
+
+        $title = "Detalhes do avião: {$brand->name}";
+
+        return view('panel.brands.show', compact('title', 'brand'));
     }
 
     /**
@@ -122,7 +129,14 @@ class BrandController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $brand = $this->brand->find($id);
+
+        if (!$brand)
+            return redirect()->back()->with('error', 'Id não encontrado.');
+
+        $brand->delete();
+
+        return redirect()->route('brands.index')->with('success', 'Avião deletado com sucesso.');
     }
 
     /**
@@ -133,10 +147,11 @@ class BrandController extends Controller
      */
     public function search(Request $request)
     {
+        $dataForm = $request->except('_token');
         $brands = $this->brand->search($request->name, $this->totalPage);
-        $title = "Brands, filtros para: {$request->name}";
+        $title = "Buscou filtro para: {$request->name}";
 
-        return view('panel.brands.index',  compact('title', 'brands'));
+        return view('panel.brands.index',  compact('title', 'brands', 'dataForm'));
 
     }
 }
