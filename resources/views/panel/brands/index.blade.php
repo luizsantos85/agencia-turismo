@@ -13,7 +13,7 @@
 <div class="content-din">
     <div class="content-din">
         <div class="class-btn-insert">
-            <a href="{{route('brands.create')}}" class="btn btn-insert">
+            <a href="{{route('brands.create')}}" class="btn btn-primary">
                 <span class="glyphicon glyphicon-plus"></span>
                 Cadastrar
             </a>
@@ -24,11 +24,10 @@
 
     <div class="content-din bg-white">
         <div class="form-search">
-            <form class="form form-inline">
-                <input type="text" name="nome" placeholder="Nome:" class="form-control">
-                <input type="text" name="email" placeholder="E-mail:" class="form-control">
-                <button class="btn btn-search">Pesquisar</button>
-            </form>
+            {!! Form::open(['route' => 'brands.search','class' => 'form form-inline']) !!}
+            {!! Form::text('name', null, ['class'=> 'form-control', 'placeholder' => 'Nome...'])!!}
+            <button class="btn btn-default">Pesquisar</button>
+            {!! Form::close() !!}
         </div>
 
 
@@ -45,8 +44,8 @@
                 <td>{{$brand->id}}</td>
                 <td>{{$brand->name}}</td>
                 <td>
-                    <a href="{{route('brands.edit', $brand->id)}}" class="edit">Edit</a>
-                    <a href="{{route('brands.destroy', $brand->id)}}" class="delete">Delete</a>
+                    <a href="{{route('brands.edit', $brand->id)}}" class="btn btn-warning">Edit</a>
+                    <a href="{{route('brands.destroy', $brand->id)}}" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
             @empty

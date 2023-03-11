@@ -9,4 +9,10 @@ class Brand extends Model
 {
     use HasFactory;
     protected $fillable = ['name'];
+
+    public function search($data, $totalPage)
+    {
+        // $dataSearch = $data->name;
+        return $this->where('name','like',"%{$data}%")->paginate($totalPage);
+    }
 }

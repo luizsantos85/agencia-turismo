@@ -25,6 +25,7 @@ class BrandController extends Controller
     public function index()
     {
         $title = 'Gestão de Aviões';
+
         $brands = $this->brand->paginate($this->totalPage);
 
         return view('panel.brands.index',  compact('title', 'brands'));
@@ -122,5 +123,20 @@ class BrandController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Search item
+     *
+     * @param string $data
+     * @return Response
+     */
+    public function search(Request $request)
+    {
+        $brands = $this->brand->search($request->name, $this->totalPage);
+        $title = "Brands, filtros para: {$request->name}";
+
+        return view('panel.brands.index',  compact('title', 'brands'));
+
     }
 }
