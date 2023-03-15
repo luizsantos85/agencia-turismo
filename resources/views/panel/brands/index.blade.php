@@ -50,7 +50,7 @@
             </tr>
             @empty
             <tr>
-                <td>Nenhum avião cadastrado.</td>
+                <td>Nenhuma marca cadastrada.</td>
             </tr>
             @endforelse
 

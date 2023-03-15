@@ -24,7 +24,7 @@ class BrandController extends Controller
      */
     public function index()
     {
-        $title = 'Gestão de Aviões';
+        $title = 'Gestão de Companhias Aéreas';
 
         $brands = $this->brand->paginate($this->totalPage);
 
@@ -38,8 +38,7 @@ class BrandController extends Controller
      */
     public function create()
     {
-        $title = 'Cadastro de novo avião';
-
+        $title = 'Cadastro de nova marca';
         return view('panel.brands.create-edit',  compact('title'));
     }
 
@@ -74,7 +73,7 @@ class BrandController extends Controller
         if (!$brand)
             return redirect()->back()->with('error', 'Id não encontrado.');
 
-        $title = "Detalhes do avião: {$brand->name}";
+        $title = "Detalhes da marca: {$brand->name}";
 
         return view('panel.brands.show', compact('title', 'brand'));
     }
@@ -92,7 +91,7 @@ class BrandController extends Controller
         if(!$brand)
             return redirect()->back()->with('error', 'Id não encontrado.');
 
-        $title = "Editar avião: {$brand->name}";
+        $title = "Editar marca: {$brand->name}";
 
         return view('panel.brands.create-edit', compact('title','brand'));
     }
@@ -114,7 +113,7 @@ class BrandController extends Controller
 
         if ($brand->update($dataForm))
             return redirect()->route('brands.index')
-            ->with('success', 'Avião atualizado com sucesso.');
+                ->with('success', 'Marca atualizada com sucesso.');
         else
             return redirect()->back()
                 ->with('error', 'Falha ao editar.');
@@ -136,7 +135,7 @@ class BrandController extends Controller
 
         $brand->delete();
 
-        return redirect()->route('brands.index')->with('success', 'Avião deletado com sucesso.');
+        return redirect()->route('brands.index')->with('success', 'Marca deletada com sucesso.');
     }
 
     /**
@@ -152,6 +151,5 @@ class BrandController extends Controller
         $title = "Buscou filtro para: {$request->name}";
 
         return view('panel.brands.index',  compact('title', 'brands', 'dataForm'));
-
     }
 }

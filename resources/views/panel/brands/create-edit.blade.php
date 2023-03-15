@@ -15,15 +15,11 @@
     @include('panel.layouts.alerts')
 
     @if (isset($brand))
-        {{-- <form class="form form-search form-ds" action="{{route('brands.update', $brand->id)}}" method="POST"> --}}
-        {{-- @method('PUT') --}}
         {!! Form::model($brand,['route' => ['brands.update', $brand->id], 'class' => 'form form-search form-ds', 'method' => 'PUT']) !!}
     @else
-        {{-- <form class="form form-search form-ds" action="{{route('brands.store')}}" method="POST"> --}}
         {!! Form::open(['route' => 'brands.store', 'class' => 'form form-search form-ds']) !!}
     @endif
             <div class="form-group">
-                {{-- <input type="text" name="name" placeholder="Nome:" class="form-control" value="{{$brand->name ?? old('name')}}"> --}}
                 {!! Form::text('name', null, ['class'=> 'form-control', 'placeholder' => 'Nome...'])!!}
             </div>
 
