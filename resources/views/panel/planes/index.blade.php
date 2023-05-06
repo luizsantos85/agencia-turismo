@@ -35,6 +35,7 @@
         <table class="table table-striped">
             <tr>
                 <th style="width:100px;">#</th>
+                <th>Classe</th>
                 <th>Companhia Aérea</th>
                 <th>Total de passageiros</th>
                 <th style="width:150px;">Ações</th>
@@ -43,7 +44,9 @@
             @forelse ($planes as $plane)
             <tr>
                 <td>{{$plane->id}}</td>
-                <td>{{$plane->name}}</td>
+                <td>{{$plane->classes_planes($plane->class)}}</td>
+                <td>{{$plane->brand->name}}</td>
+                <td>{{$plane->qtd_passengers}}</td>
                 <td>
                     <a href="{{route('planes.edit', $plane->id)}}" class="btn btn-warning">Edit</a>
                     <a href="{{route('planes.show', $plane->id)}}" class="btn btn-default">Detalhes</a>

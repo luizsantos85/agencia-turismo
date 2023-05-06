@@ -1,11 +1,14 @@
 
 <div class="form-group">
-    {!! Form::number('qtd_passengers', null, ['class'=> 'form-control', 'placeholder' => 'Total de passageiros..'])!!}
+    <label for="qtd_passengers">Quantidade de passageiros:</label>
+    {!! Form::number('qtd_passengers', 100, ['class'=> 'form-control'])!!}
 </div>
 <div class="form-group">
+    <label for="class">Classe:</label>
     {!! Form::select('class', $classes_planes, null, ['class'=> 'form-control'])!!}
 </div>
 <div class="form-group">
+    <label for="brand_id">Companhia aérea:</label>
     {!! Form::select('brand_id', $brands, null, ['class'=> 'form-control'])!!}
 </div>
 

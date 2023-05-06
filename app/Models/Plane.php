@@ -11,12 +11,24 @@ class Plane extends Model
 
     protected $fillable = ['qtd_passengers', 'class', 'brand_id'];
 
-    public function classes_planes()
+    public function classes_planes($className = null)
     {
-        return [
+        $classes =  [
             'economic' => 'Econômica',
             'luxury' => 'Luxo'
         ];
+
+        if (!$className) {
+            return $classes;
+        }
+        
+        return $classes[$className];
+    }
+
+    //Relacionamentos
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class, 'brand_id', 'id');
     }
 
 }
