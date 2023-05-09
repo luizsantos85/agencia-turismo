@@ -69,7 +69,11 @@ class PlaneController extends Controller
      */
     public function show($id)
     {
-        //
+        $title = 'Detalhes do avião';
+        $plane = $this->plane->find($id);
+
+        return view();
+
     }
 
     /**
@@ -80,7 +84,17 @@ class PlaneController extends Controller
      */
     public function edit($id)
     {
-        //
+        $title = 'Editar de avião';
+        $plane = $this->plane->find($id);
+        $brands = Brand::pluck('name', 'id');
+
+        $classes_planes = $this->plane->classes_planes();
+
+        if(!$plane){
+            return redirect()->back()->with('error', 'Id não encontrado!');
+        }
+
+        return view('panel.planes.edit', compact('plane','title','brands','classes_planes'));
     }
 
     /**
@@ -92,7 +106,18 @@ class PlaneController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $plane = $this->plane->find($id);
+        $data = $request->except('_token');
+
+        if (!$plane) {
+            return redirect()->back()->with('error', 'Id não encontrado!');
+        }
+
+        if (!$plane->update($data)) {
+            return redirect()->back()->with('error', 'Falha ao cadastrar')->withInput();
+        }
+        
+        return redirect()->route('planes.index')->with('success', 'Atualização realizada com sucesso.');
     }
 
     /**

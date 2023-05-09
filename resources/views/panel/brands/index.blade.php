@@ -44,8 +44,8 @@
                 <td>{{$brand->id}}</td>
                 <td>{{$brand->name}}</td>
                 <td>
-                    <a href="{{route('brands.edit', $brand->id)}}" class="btn btn-warning">Edit</a>
-                    <a href="{{route('brands.show', $brand->id)}}" class="btn btn-default">Detalhes</a>
+                    <a href="{{route('brands.edit', $brand->id)}}" class="btn btn-sm btn-warning">Editar</a>
+                    <a href="{{route('brands.show', $brand->id)}}" class="btn btn-sm btn-default">Detalhes</a>
                 </td>
             </tr>
             @empty

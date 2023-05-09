@@ -48,8 +48,8 @@
                 <td>{{$plane->brand->name}}</td>
                 <td>{{$plane->qtd_passengers}}</td>
                 <td>
-                    <a href="{{route('planes.edit', $plane->id)}}" class="btn btn-warning">Edit</a>
-                    <a href="{{route('planes.show', $plane->id)}}" class="btn btn-default">Detalhes</a>
+                    <a href="{{route('planes.edit', $plane->id)}}" class="btn btn-sm btn-warning">Editar</a>
+                    <a href="{{route('planes.show', $plane->id)}}" class="btn btn-sm btn-default">Detalhes</a>
                 </td>
             </tr>
             @empty
