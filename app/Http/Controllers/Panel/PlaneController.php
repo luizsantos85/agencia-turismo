@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Panel;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PlaneStoreUpdateFormRequest;
 use App\Models\Brand;
 use App\Models\Plane;
 use Illuminate\Http\Request;
@@ -52,7 +53,7 @@ class PlaneController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PlaneStoreUpdateFormRequest $request)
     {
         $data = $request->except('_token');
         if(!$this->plane->create($data)){
@@ -104,7 +105,7 @@ class PlaneController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PlaneStoreUpdateFormRequest $request, $id)
     {
         $plane = $this->plane->find($id);
         $data = $request->except('_token');
@@ -116,7 +117,7 @@ class PlaneController extends Controller
         if (!$plane->update($data)) {
             return redirect()->back()->with('error', 'Falha ao cadastrar')->withInput();
         }
-        
+
         return redirect()->route('planes.index')->with('success', 'Atualização realizada com sucesso.');
     }
 
@@ -129,5 +130,15 @@ class PlaneController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function search(Request $request)
+    {
+        $dataForm = $request->except(['_token']);
+        $data = $request->keySearch;
+        $title = "Resultados da pesquisa para : {$data}";
+        $planes = $this->plane->search($data, $this->totalPage);
+
+        return view('panel.planes.index', compact('title', 'planes', 'dataForm'));
     }
 }

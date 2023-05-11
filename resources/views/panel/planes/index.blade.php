@@ -24,10 +24,10 @@
 
     <div class="content-din bg-white">
         <div class="form-search">
-            {{-- {!! Form::open(['route' => 'planes.search','class' => 'form form-inline']) !!}
-            {!! Form::text('name', null, ['class'=> 'form-control', 'placeholder' => 'Nome...'])!!}
+            {!! Form::open(['route' => 'planes.search','class' => 'form form-inline']) !!}
+            {!! Form::text('keySearch', null, ['class'=> 'form-control', 'placeholder' => 'Digite a pesquisa...'])!!}
             <button class="btn btn-default">Pesquisar</button>
-            {!! Form::close() !!} --}}
+            {!! Form::close() !!}
         </div>
 
 

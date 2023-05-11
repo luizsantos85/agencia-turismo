@@ -10,6 +10,7 @@ Route::prefix('panel')->group(function(){
     Route::get('/', [PanelController::class, 'index'])->name('panel.index');
     Route::any('/brands/search', [BrandController::class,'search'])->name('brands.search');
     Route::resource('/brands', BrandController::class);
+    Route::any('/planes/search', [PlaneController::class,'search'])->name('planes.search');
     Route::resource('/planes', PlaneController::class);
 
 });
