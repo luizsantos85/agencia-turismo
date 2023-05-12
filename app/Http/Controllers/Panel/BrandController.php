@@ -142,7 +142,7 @@ class BrandController extends Controller
      * Search item
      *
      * @param string $data
-     * @return Response
+     * @return View
      */
     public function search(Request $request)
     {
@@ -151,5 +151,18 @@ class BrandController extends Controller
         $title = "Buscou filtro para: {$request->name}";
 
         return view('panel.brands.index',  compact('title', 'brands', 'dataForm'));
+    }
+
+    public function planes($id)
+    {
+        $brand = $this->brand->find($id);
+
+        if (!$brand)
+            return redirect()->back()->with('error', 'Id não encontrado.');
+
+        $planes = $brand->planes()->get();
+        $title = "Aviões da companhia aérea: {$brand->name}";
+
+        return view('panel.brands.planes',  compact('title', 'brand', 'planes'));
     }
 }

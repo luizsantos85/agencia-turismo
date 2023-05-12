@@ -36,7 +36,7 @@
             <tr>
                 <th style="width:100px;">#</th>
                 <th>Nome</th>
-                <th width="150">Ações</th>
+                <th width="200">Ações</th>
             </tr>
 
             @forelse ($brands as $brand)
@@ -45,7 +45,8 @@
                 <td>{{$brand->name}}</td>
                 <td>
                     <a href="{{route('brands.edit', $brand->id)}}" class="btn btn-sm btn-warning">Editar</a>
-                    <a href="{{route('brands.show', $brand->id)}}" class="btn btn-sm btn-default">Detalhes</a>
+                    <a href="{{route('brands.show', $brand->id)}}" class="btn btn-sm btn-info">Detalhes</a>
+                    <a href="{{route('brands.planes', $brand->id)}}" class="btn btn-sm btn-default"><i class="fa fa-plane" aria-hidden="true"></i></a>
                 </td>
             </tr>
             @empty

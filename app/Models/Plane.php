@@ -25,18 +25,18 @@ class Plane extends Model
         return $classes[$className];
     }
 
+    public function search($data, $totalPage)
+    {
+        return $this->where('id', $data)
+            ->orWhere('qtd_passengers', $data)
+            ->orWhere('class', $data)
+            ->paginate($totalPage);
+    }
+
     //Relacionamentos
     public function brand()
     {
         return $this->belongsTo(Brand::class, 'brand_id', 'id');
-    }
-
-    public function search($data, $totalPage)
-    {
-        return $this->where('id',$data)
-                    ->orWhere('qtd_passengers',$data)
-                    ->orWhere('class',$data)
-                    ->paginate($totalPage);
     }
 
 }
