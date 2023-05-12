@@ -3,7 +3,7 @@
 @section('content')
 <div class="bred">
     <a href="{{route('panel.index')}}" class="bred">Dashboard ></a> <a href="{{route('planes.index')}}"
-        class="bred">Aviões ></a> <a href="" class="bred">Cadastro</a>
+        class="bred">Aviões ></a> <a href="" class="bred">Editar</a>
 </div>
 
 
