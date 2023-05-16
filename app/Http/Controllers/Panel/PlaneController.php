@@ -136,7 +136,7 @@ class PlaneController extends Controller
         if (!$plane) {
             return redirect()->back()->with('error', 'Id não encontrado!');
         }
-        
+
         $plane->delete();
         return redirect()->route('planes.index')->with('success', 'Exclusão realizada com sucesso.');
     }
@@ -145,7 +145,7 @@ class PlaneController extends Controller
     {
         $dataForm = $request->except(['_token']);
         $data = $request->keySearch;
-        $title = "Resultados da pesquisa para : {$data}";
+        $title = "Resultados da pesquisa para: {$data}";
         $planes = $this->plane->search($data, $this->totalPage);
 
         return view('panel.planes.index', compact('title', 'planes', 'dataForm'));
