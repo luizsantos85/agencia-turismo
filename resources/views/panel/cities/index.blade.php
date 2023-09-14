@@ -3,11 +3,13 @@
 @section('content')
 <div class="bred">
     <a href="{{route('panel.index')}}" class="bred">Dashboard ></a>
-    <a href="#" class="bred">Estados</a>
+    <a href="{{route('states.index')}}" class="bred">Estados ></a>
+    <a href="{{route('cities.index',$state->initials)}}" class="bred">{{$state->name}} ></a>
+    <a href="#" class="bred">Cidades</a>
 </div>
 
 <div class="title-pg">
-    <h1 class="title-pg">{{$title ?? 'Gestão de Estados Brasileiros'}}</h1>
+    <h1 class="title-pg">{{$title ?? 'Cidades do estado : '.$state->name}}</h1>
 </div>
 
 <div class="content-din">
@@ -16,7 +18,7 @@
 
     <div class="content-din bg-white">
         <div class="form-search">
-            {!! Form::open(['route' => 'states.search','class' => 'form form-inline']) !!}
+            {!! Form::open(['route' => ['cities.search',$state->initials],'class' => 'form form-inline']) !!}
             {!! Form::text('keySearch', null, ['class'=> 'form-control', 'placeholder' => 'Digite a pesquisa...'])!!}
             <button class="btn btn-default">Pesquisar</button>
             {!! Form::close() !!}
@@ -28,17 +30,15 @@
             <tr>
                 <th style="width:100px;">#</th>
                 <th>Nome</th>
-                <th>Sigla</th>
                 <th style="width:150px;">Ações</th>
             </tr>
 
-            @forelse ($states as $state)
+            @forelse ($cities as $city)
             <tr>
-                <td>{{ $state->id }}</td>
-                <td>{{ $state->name }}</td>
-                <td>{{ $state->initials }}</td>
+                <td>{{ $city->id }}</td>
+                <td>{{ $city->name }}</td>
                 <td>
-                    <a href="{{route('cities.index',$state->initials)}}" class="btn btn-sm btn-info"><i class="fa fa-map-marker" aria-hidden="true"></i> Cidades</a>
+                    Ações
                 </td>
             </tr>
             @empty
@@ -49,9 +49,9 @@
 
         </table>
         {{-- @if (isset($dataForm))
-            {!! $planes->appends($dataForm)->links('pagination::bootstrap-4') !!}
+        {!! $planes->appends($dataForm)->links('pagination::bootstrap-4') !!}
         @else
-            {!! $planes->links('pagination::bootstrap-4') !!}
+        {!! $planes->links('pagination::bootstrap-4') !!}
         @endif --}}
     </div>
     <!--Content Dinâmico-->

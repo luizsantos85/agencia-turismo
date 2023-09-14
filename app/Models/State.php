@@ -15,4 +15,9 @@ class State extends Model
             ->orWhere('initials', $data)
             ->get();
     }
+
+    public function cities()
+    {
+        return $this->hasMany(City::class,'state_id');
+    }
 }

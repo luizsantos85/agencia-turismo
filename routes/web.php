@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Site\SiteController;
 use App\Http\Controllers\Panel\PanelController;
 use App\Http\Controllers\Panel\BrandController;
+use App\Http\Controllers\Panel\CityController;
 use App\Http\Controllers\Panel\PlaneController;
 use App\Http\Controllers\Panel\StateController;
 
@@ -16,9 +17,13 @@ Route::prefix('panel')->group(function(){
 
     Route::any('/planes/search', [PlaneController::class,'search'])->name('planes.search');
     Route::resource('/planes', PlaneController::class);
-    
-    Route::any('/states/search', [StateController::class,'search'])->name('states.search');
+
+    Route::post('/states/search', [StateController::class,'search'])->name('states.search');
     Route::get('/states', [StateController::class,'index'])->name('states.index');
+
+    Route::post('/states/{initials}/cities/search', [CityController::class,'index'])->name('cities.search');
+    Route::get('/states/{initials}/cities', [CityController::class,'index'])->name('cities.index');
+
 
 });
 
