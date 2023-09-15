@@ -4,12 +4,15 @@
 <div class="bred">
     <a href="{{route('panel.index')}}" class="bred">Dashboard ></a>
     <a href="{{route('states.index')}}" class="bred">Estados ></a>
-    <a href="{{route('cities.index',$state->initials)}}" class="bred">{{$state->name}} ></a>
-    <a href="#" class="bred">Cidades</a>
+    <a href="{{route('cities.index',$state->initials)}}" class="bred">{{$state->name}} </a>
 </div>
 
 <div class="title-pg">
-    <h1 class="title-pg">{{$title ?? 'Cidades do estado : '.$state->name}}</h1>
+    <h1 class="title-pg">{{$title ?? "Cidades do estado: $state->name"}}</h1>
+    <div class="both"></div>
+    <small style="margin-left: 10px;">
+        Total de cidades: <strong>({{ $cities->total() }})</strong>
+    </small>
 </div>
 
 <div class="content-din">
@@ -28,14 +31,12 @@
 
         <table class="table table-striped">
             <tr>
-                <th style="width:100px;">#</th>
                 <th>Nome</th>
                 <th style="width:150px;">Ações</th>
             </tr>
 
             @forelse ($cities as $city)
             <tr>
-                <td>{{ $city->id }}</td>
                 <td>{{ $city->name }}</td>
                 <td>
                     Ações
@@ -48,11 +49,11 @@
             @endforelse
 
         </table>
-        {{-- @if (isset($dataForm))
-        {!! $planes->appends($dataForm)->links('pagination::bootstrap-4') !!}
+        @if (isset($dataForm))
+        {!! $cities->appends($dataForm)->links('pagination::bootstrap-4') !!}
         @else
-        {!! $planes->links('pagination::bootstrap-4') !!}
-        @endif --}}
+        {!! $cities->links('pagination::bootstrap-4') !!}
+        @endif
     </div>
     <!--Content Dinâmico-->
 

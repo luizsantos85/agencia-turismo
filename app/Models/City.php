@@ -13,4 +13,10 @@ class City extends Model
     {
         return $this->belongsTo(State::class,'state_id','id');
     }
+
+    public function search($data, $totalPage = null)
+    {
+        return $this->where('name', 'like', "%{$data}%")
+            ->get();
+    }
 }

@@ -18,10 +18,10 @@ Route::prefix('panel')->group(function(){
     Route::any('/planes/search', [PlaneController::class,'search'])->name('planes.search');
     Route::resource('/planes', PlaneController::class);
 
-    Route::post('/states/search', [StateController::class,'search'])->name('states.search');
+    Route::any('/states/search', [StateController::class,'search'])->name('states.search');
     Route::get('/states', [StateController::class,'index'])->name('states.index');
 
-    Route::post('/states/{initials}/cities/search', [CityController::class,'index'])->name('cities.search');
+    Route::any('/states/{initials}/cities/search', [CityController::class,'search'])->name('cities.search');
     Route::get('/states/{initials}/cities', [CityController::class,'index'])->name('cities.index');
 
 
