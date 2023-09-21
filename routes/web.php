@@ -5,6 +5,7 @@ use App\Http\Controllers\Site\SiteController;
 use App\Http\Controllers\Panel\PanelController;
 use App\Http\Controllers\Panel\BrandController;
 use App\Http\Controllers\Panel\CityController;
+use App\Http\Controllers\Panel\FlightController;
 use App\Http\Controllers\Panel\PlaneController;
 use App\Http\Controllers\Panel\StateController;
 
@@ -24,6 +25,8 @@ Route::prefix('panel')->group(function(){
     Route::any('/states/{initials}/cities/search', [CityController::class,'search'])->name('cities.search');
     Route::get('/states/{initials}/cities', [CityController::class,'index'])->name('cities.index');
 
+    Route::any('/flights/search', [FlightController::class,'search'])->name('flights.search');
+    Route::resource('/flights', FlightController::class);
 
 });
 
