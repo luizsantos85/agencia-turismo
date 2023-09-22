@@ -27,7 +27,7 @@ class FlightController extends Controller
     public function index()
     {
         $title = "Voos disponíveis";
-        $flights = $this->flight->paginate($this->totalPage);
+        $flights = $this->flight->getItems($this->totalPage);
 
         return view('panel.flights.index', compact('title','flights'));
     }

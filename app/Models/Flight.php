@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Flight extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'date',
         'time_duration',
@@ -26,6 +27,11 @@ class Flight extends Model
     ];
 
 
+    public function getItems($totalPage)
+    {
+        return $this->with(['origin', 'destination'])
+            ->paginate($totalPage);
+    }
 
     public function createFlight($request)
     {
@@ -47,6 +53,14 @@ class Flight extends Model
         ];
 
         return $this->create($data);
+    }
+
+    public function origin(){
+        return $this->belongsTo(Airport::class, 'airport_origin_id','id');
+    }
+
+    public function destination(){
+        return $this->belongsTo(Airport::class, 'airport_destination_id','id');
     }
 
 }

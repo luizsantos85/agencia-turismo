@@ -45,12 +45,16 @@
 
             @forelse ($flights as $flight)
             <tr>
-                <td>{{$flight->id}}</td>
-                <td>{{$flight->airport_origin_id}}</td>
-                <td>{{$flight->airport_destination_id}}</td>
-                <td>{{$flight->qtd_stops}}</td>
-                <td>{{$flight->date}}</td>
-                <td>{{$flight->hour_output}}</td>
+                <td>{{ $flight->id }}</td>
+                <td>
+                    <a href="#">{{ $flight->origin->name }}</a>
+                </td>
+                <td>
+                    <a href="#">{{ $flight->destination->name }}</a>
+                </td>
+                <td>{{ $flight->qtd_stops }}</td>
+                <td>{{ $flight->date }}</td>
+                <td>{{ $flight->hour_output }}</td>
                 <td>
                     <a href="{{route('flights.edit', $flight->id)}}" class="btn btn-sm btn-warning">Editar</a>
                     <a href="{{route('flights.destroy', $flight->id)}}" class="btn btn-sm btn-default">Deletar</a>
