@@ -81,7 +81,17 @@ class FlightController extends Controller
      */
     public function edit($id)
     {
-        //
+        $title = 'Edição de voo';
+        $flight = $this->flight->find($id);
+
+        $planes = Plane::pluck('id', 'id');
+        $airports = Airport::pluck('name', 'id');
+
+        if(!$flight){
+            return redirect()->back()->with('error', 'Id não encontrado.');
+        }
+
+        return view('panel.flights.edit', compact('title', 'flight', 'airports', 'planes'));
     }
 
     /**
@@ -93,7 +103,18 @@ class FlightController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $flight = $this->flight->find($id);
+        $data = $request->except('_token');
+
+        if (!$flight) {
+            return redirect()->back()->with('error', 'Id não encontrado!');
+        }
+
+        if (!$flight->update($data)) {
+            return redirect()->back()->with('error', 'Falha ao cadastrar')->withInput();
+        }
+
+        return redirect()->route('flights.index')->with('success', 'Atualização realizada com sucesso.');
     }
 
     /**

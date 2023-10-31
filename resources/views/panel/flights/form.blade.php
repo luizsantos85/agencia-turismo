@@ -10,17 +10,17 @@
 </div>
 
 <div class="form-group">
-    <label for="airport_origin">Origem:</label>
-    {!! Form::select('airport_origin', $airports , null, ['class'=> 'form-control'])!!}
+    <label for="airport_origin_id">Origem:</label>
+    {!! Form::select('airport_origin_id', $airports , null, ['class'=> 'form-control'])!!}
 </div>
 <div class="form-group">
-    <label for="airport_destination">Destino:</label>
-    {!! Form::select('airport_destination', $airports , null, ['class'=> 'form-control'])!!}
+    <label for="airport_destination_id">Destino:</label>
+    {!! Form::select('airport_destination_id', $airports , null, ['class'=> 'form-control'])!!}
 </div>
 
 <div class="form-group">
     <label for="date">Data do voo:</label>
-    {!! Form::date('date', \Carbon\Carbon::now(), ['class'=> 'form-control']) !!}
+    {!! Form::date('date', null, ['class'=> 'form-control']) !!}
 </div>
 
 <div class="form-group">
