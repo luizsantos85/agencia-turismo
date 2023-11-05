@@ -123,9 +123,15 @@ class FlightController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete($id)
     {
-        //
+        $flight = $this->flight->find($id);
+        if (!$flight) {
+            return redirect()->back()->with('error', 'Id não encontrado!');
+        }
+
+        $flight->delete();
+        return redirect()->route('flights.index')->with('success', 'Exclusão realizada com sucesso.');
     }
 
     public function search(Request $request)

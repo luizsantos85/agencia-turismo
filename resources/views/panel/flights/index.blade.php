@@ -57,7 +57,7 @@
                 <td>{{ $flight->hour_output }}</td>
                 <td>
                     <a href="{{route('flights.edit', $flight->id)}}" class="btn btn-sm btn-warning">Editar</a>
-                    <a href="{{route('flights.destroy', $flight->id)}}" class="btn btn-sm btn-default">Deletar</a>
+                    <a href="{{route('flights.delete', $flight->id)}}" class="btn btn-sm btn-default" onclick="return confirm('Deseja realmente excluir o avião?')">Deletar</a>
                 </td>
             </tr>
             @empty
