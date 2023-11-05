@@ -70,7 +70,14 @@ class FlightController extends Controller
      */
     public function show($id)
     {
-        //
+        $title = 'Detalhes do voo';
+        $flight = $this->flight->with(['origin', 'destination'])->find($id);
+
+        if (!$flight) {
+            return redirect()->back()->with('error', 'Id não encontrado.');
+        }
+
+        return view('panel.flights.show', compact('title', 'flight'));
     }
 
     /**
@@ -123,7 +130,7 @@ class FlightController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function delete($id)
+    public function destroy($id)
     {
         $flight = $this->flight->find($id);
         if (!$flight) {

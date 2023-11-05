@@ -26,8 +26,6 @@ Route::prefix('panel')->group(function(){
     Route::get('/states/{initials}/cities', [CityController::class,'index'])->name('cities.index');
 
     Route::any('/flights/search', [FlightController::class,'search'])->name('flights.search');
-    Route::get('/flights/{id}', [FlightController::class,'delete'])->name('flights.delete');
-
     Route::resource('/flights', FlightController::class);
 
 });

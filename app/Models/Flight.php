@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+// use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -48,8 +49,8 @@ class Flight extends Model
             'qtd_stops' => $request['qtd_stops'],
             'description' => $request['description'],
             'plane_id' => $request['plane_id'],
-            'airport_origin_id' => $request['airport_origin'],
-            'airport_destination_id' => $request['airport_destination'],
+            'airport_origin_id' => $request['airport_origin_id'],
+            'airport_destination_id' => $request['airport_destination_id'],
         ];
 
         return $this->create($data);
@@ -62,5 +63,12 @@ class Flight extends Model
     public function destination(){
         return $this->belongsTo(Airport::class, 'airport_destination_id','id');
     }
+
+
+    //Mutator
+    // public function getDateAttribute($value)
+    // {
+    //     return Carbon::parse($value)->format('d/m/Y');
+    // }
 
 }
