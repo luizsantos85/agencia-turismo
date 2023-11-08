@@ -13,7 +13,7 @@
 <div class="content-din">
     @include('panel.layouts.alerts')
 
-    {!! Form::model($flight,['route' => ['flights.update',$flight->id], 'class' => 'form form-search form-ds', 'files' => true, 'method' => 'PUT']) !!}
+    {!! Form::model($flight, ['route' => ['flights.update',$flight->id], 'class' => 'form form-search form-ds', 'files' => true, 'method' => 'PUT']) !!}
         @include('panel.flights.form')
     {!! Form::close() !!}
 

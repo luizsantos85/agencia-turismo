@@ -35,6 +35,7 @@
         <table class="table table-striped">
             <tr>
                 <th style="width:100px;">#</th>
+                <th>Imagem</th>
                 <th>Origem</th>
                 <th>Destino</th>
                 <th>Paradas</th>
@@ -46,6 +47,13 @@
             @forelse ($flights as $flight)
             <tr>
                 <td>{{ $flight->id }}</td>
+                <td>
+                    @if ($flight->image)
+                    <img src='{{url("storage/flights/$flight->image")}}' alt="{{$flight->id}}" style="width: 50px;">
+                    @else
+                        -
+                    @endif
+                </td>
                 <td>
                     <a href="#">{{ $flight->origin->name }}</a>
                 </td>
@@ -68,9 +76,9 @@
 
         </table>
         @if (isset($dataForm))
-            {!! $flights->appends($dataForm)->links('pagination::bootstrap-4') !!}
+        {!! $flights->appends($dataForm)->links('pagination::bootstrap-4') !!}
         @else
-            {!! $flights->links('pagination::bootstrap-4') !!}
+        {!! $flights->links('pagination::bootstrap-4') !!}
         @endif
     </div>
     <!--Content Dinâmico-->

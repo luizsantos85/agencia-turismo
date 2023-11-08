@@ -8,6 +8,7 @@ use App\Models\Brand;
 use App\Models\Flight;
 use App\Models\Plane;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class FlightController extends Controller
 {
@@ -74,7 +75,7 @@ class FlightController extends Controller
         if (!$this->flight->createFlight($data)) {
             return redirect()->back()->with('error', 'Falha ao cadastrar')->withInput();
         }
-        
+
         return redirect()->route('flights.index')->with('success', 'Cadastro realizado com sucesso.');
     }
 
@@ -131,6 +132,26 @@ class FlightController extends Controller
 
         if (!$flight) {
             return redirect()->back()->with('error', 'Id não encontrado!');
+        }
+
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            if($flight->image){
+                if (Storage::exists("flights/{$flight->image}")) {
+                    Storage::delete("flights/{$flight->image}");
+                }
+            }
+
+            $fileName = uniqid(date('HisYmd'));
+            $ext = $request->image->extension();
+            $newFileName = "{$fileName}.{$ext}";
+
+            if (!$request->file('image')->storeAs('flights', $newFileName)) {
+                return redirect()->back()
+                    ->with('error', 'Falha no upload')
+                    ->withInput();
+            }
+
+            $data['image'] = $newFileName;
         }
 
         if (!$flight->update($data)) {
