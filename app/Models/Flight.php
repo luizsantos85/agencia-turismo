@@ -64,6 +64,28 @@ class Flight extends Model
         return $this->belongsTo(Airport::class, 'airport_destination_id','id');
     }
 
+    public function search($request, $totalPage)
+    {
+        // $flights = $this->where(function($query) use ($request){
+        //     if($request->code)
+        //         $query->where('id', $request->code);
+
+        //     if($request->date)
+        //         $query->where('date', '>=', $request->date);
+        // });
+
+
+        $flights = $this->when($request->code != null, function ($query) use ($request) {
+            return $query->where('id', $request->code);
+        })
+        ->when($request->date != null, function ($query) use ($request) {
+            return $query->where('date','>=', $request->date);
+        })
+        ->paginate($totalPage);
+
+        return $flights;
+    }
+
 
     //Mutator
     // public function getDateAttribute($value)

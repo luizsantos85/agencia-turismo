@@ -180,12 +180,14 @@ class FlightController extends Controller
 
     public function search(Request $request)
     {
-        dd($request->all());
-        // $dataForm = $request->except(['_token']);
-        // $data = $request->keySearch;
-        // $title = "Resultados da pesquisa para: {$data}";
-        // $planes = $this->plane->search($data, $this->totalPage);
+        $dataForm = $request->except(['_token']);
+        
+        $search = isset($request->code) ? $request->code : date('d/m/Y', strtotime($request->date));
 
-        // return view('panel.planes.index', compact('title', 'planes', 'dataForm'));
+        $title = "Resultados da pesquisa para: {$search}";
+
+        $flights = $this->flight->search($request, $this->totalPage);
+
+        return view('panel.flights.index', compact('title', 'flights', 'dataForm'));
     }
 }

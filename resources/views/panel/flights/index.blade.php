@@ -25,7 +25,9 @@
     <div class="content-din bg-white">
         <div class="form-search">
             {!! Form::open(['route' => 'flights.search','class' => 'form form-inline']) !!}
-            {!! Form::text('keySearch', null, ['class'=> 'form-control', 'placeholder' => 'Digite a pesquisa...'])!!}
+            {!! Form::number('code', null, ['class'=> 'form-control', 'placeholder' => 'Código do voo...'])!!}
+            {!! Form::date('date', null, ['class'=> 'form-control'])!!}
+
             <button class="btn btn-default">Pesquisar</button>
             {!! Form::close() !!}
         </div>
