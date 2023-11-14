@@ -29,8 +29,9 @@ class FlightController extends Controller
     {
         $title = "Voos disponíveis";
         $flights = $this->flight->getItems($this->totalPage);
+        $airports = Airport::pluck('name','id');
 
-        return view('panel.flights.index', compact('title','flights'));
+        return view('panel.flights.index', compact('title','flights','airports'));
     }
 
     /**
@@ -181,13 +182,30 @@ class FlightController extends Controller
     public function search(Request $request)
     {
         $dataForm = $request->except(['_token']);
-        
-        $search = isset($request->code) ? $request->code : date('d/m/Y', strtotime($request->date));
-
-        $title = "Resultados da pesquisa para: {$search}";
-
         $flights = $this->flight->search($request, $this->totalPage);
+        $airports = Airport::pluck('name', 'id');
 
-        return view('panel.flights.index', compact('title', 'flights', 'dataForm'));
+        // Mapear os valores dos campos de pesquisa
+        $serchValues = array_map(function($key,$value) use($airports, $request){
+            if($key == 'date' && !empty($request->date)){
+                $value = date('d/m/Y',strtotime($value));
+            }
+            if($key == 'origin' || $key == 'destination'){
+                $airportName = $airports[$value] ?? null;
+                $value = $airportName ? $airportName : null;
+            }
+
+            return $value ? "{$value}" : null;
+        }, array_keys($dataForm), $dataForm);
+
+        // Filtrar valores não nulos
+        $filteredValues = array_filter($serchValues);
+        // Concatenar os valores dos campos em uma string
+        $searchString = implode(', ', $filteredValues);
+
+        $title = "Resultados da pesquisa para: {$searchString}";
+
+
+        return view('panel.flights.index', compact('title', 'flights', 'dataForm',  'airports'));
     }
 }

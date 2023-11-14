@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="bred">
-    <a href="{{route('panel.index')}}" class="bred">Dashboard ></a> <a href="{{route('planes.index')}}"
+    <a href="{{route('panel.index')}}" class="bred">Dashboard ></a> <a href="{{route('flights.index')}}"
         class="bred">Voos</a>
 </div>
 
@@ -27,6 +27,8 @@
             {!! Form::open(['route' => 'flights.search','class' => 'form form-inline']) !!}
             {!! Form::number('code', null, ['class'=> 'form-control', 'placeholder' => 'Código do voo...'])!!}
             {!! Form::date('date', null, ['class'=> 'form-control'])!!}
+            {!! Form::select('origin',$airports, null, ['class'=> 'form-control','placeholder' => 'Origem'])!!}
+            {!! Form::select('destination',$airports, null, ['class'=> 'form-control', 'placeholder' => 'Destino'])!!}
 
             <button class="btn btn-default">Pesquisar</button>
             {!! Form::close() !!}

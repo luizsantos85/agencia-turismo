@@ -81,6 +81,12 @@ class Flight extends Model
         ->when($request->date != null, function ($query) use ($request) {
             return $query->where('date','>=', $request->date);
         })
+        ->when($request->origin != null, function ($query) use ($request) {
+            return $query->where('airport_origin_id', $request->origin);
+        })
+        ->when($request->destination != null, function ($query) use ($request) {
+            return $query->where('airport_destination_id', $request->destination);
+        })
         ->paginate($totalPage);
 
         return $flights;
