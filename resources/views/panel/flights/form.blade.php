@@ -54,7 +54,7 @@
 </div>
 
 <div class="form-group">
-    {!! Form::checkbox('is_promotion', null, ['id'=> 'is_promotion']) !!}
+    {!! Form::checkbox('is_promotion',1, null, ['id'=> 'is_promotion']) !!}
     <label for="is_promotion">É promoção?</label>
 </div>
 

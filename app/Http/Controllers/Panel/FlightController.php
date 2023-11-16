@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Panel;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreUpdateFlightFormRequest;
 use App\Models\Airport;
 use App\Models\Brand;
 use App\Models\Flight;
@@ -55,7 +56,7 @@ class FlightController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUpdateFlightFormRequest $request)
     {
         $data = $request->except(('_token'));
 
@@ -126,7 +127,7 @@ class FlightController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreUpdateFlightFormRequest $request, $id)
     {
         $flight = $this->flight->find($id);
         $data = $request->except('_token');

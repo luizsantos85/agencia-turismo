@@ -27,6 +27,10 @@ class Flight extends Model
         'airport_destination_id',
     ];
 
+    // protected $casts = [
+    //     'is_promotion' => 'boolean'
+    // ];
+
 
     public function getItems($totalPage)
     {
