@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Panel\AirportController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Site\SiteController;
 use App\Http\Controllers\Panel\PanelController;
@@ -27,6 +28,9 @@ Route::prefix('panel')->group(function(){
 
     Route::any('/flights/search', [FlightController::class,'search'])->name('flights.search');
     Route::resource('/flights', FlightController::class);
+
+
+    Route::resource('city/{id}/airports', AirportController::class);
 
 });
 

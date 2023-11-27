@@ -39,7 +39,10 @@
             <tr>
                 <td>{{ $city->name }}</td>
                 <td>
-                    Ações
+                    <a href="{{route('airports.index',$city->id)}}">
+                        <i class="fa fa-thumb-tack"></i>
+                        Aeroportos
+                    </a>
                 </td>
             </tr>
             @empty

@@ -14,6 +14,11 @@ class City extends Model
         return $this->belongsTo(State::class,'state_id','id');
     }
 
+    public function airports()
+    {
+        return $this->hasMany(Airport::class, 'city_id', 'id');
+    }
+
     public function search($data, $totalPage = null)
     {
         return $this->where('name', 'like', "%{$data}%")
