@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Airport extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'latitude',
+        'longitude',
+        'address',
+        'number',
+        'zip_code',
+        'complement',
+        'city_id'
+    ];
 }
