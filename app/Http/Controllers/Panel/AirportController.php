@@ -60,7 +60,19 @@ class AirportController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $city = $this->city->find($request->city_id);
+        if(!$city){
+            return redirect()->back()
+                ->with('error', 'Cidade não encontrada.')
+                ->withInput();
+        }
+
+        if ($this->airport->create($request->all())) {
+            return redirect()->route('airports.index',$request->city_id)
+                    ->with('success', 'Aeroporto cadastrado com sucesso.');
+        }
+
+        return redirect()->back()->with('error', 'Falha ao cadastrar.')->withInput();
     }
 
     /**
@@ -77,12 +89,19 @@ class AirportController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $cityId, $airportId
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($cityId,$airportId)
     {
-        //
+        $airport = $this->airport->with('city')->findOrFail($airportId);
+        $city = $airport->city;
+
+        if(!$airport) return redirect()->back()->with('error','Aeroporto não encontrado.');
+
+        $title = "Edição do {$airport->name}";
+
+        return view('panel.airports.edit', compact('city', 'title', 'airport'));
     }
 
     /**
@@ -92,9 +111,22 @@ class AirportController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $idCity, $idAirport)
     {
-        //
+        $airport = $this->airport->find($idAirport);
+
+        if (!$airport) {
+            return redirect()->back()
+                ->with('error', 'Aeroporto não encontrado.')
+                ->withInput();
+        }
+
+        if ($airport->update($request->all())) {
+            return redirect()->route('airports.index', $request->city_id)
+                ->with('success', 'Aeroporto atualizado com sucesso.');
+        }
+
+        return redirect()->back()->with('error', 'Falha ao atualizar.')->withInput();
     }
 
     /**

@@ -37,5 +37,5 @@
 
 <div class="form-group">
     <button class="btn btn-sm btn-primary">Salvar</button>
-    <a href="{{route('planes.index')}}" class="btn btn-sm btn-link">Voltar</a>
+    <a href="{{route('airports.index',$city->id)}}" class="btn btn-sm btn-link">Voltar</a>
 </div>
