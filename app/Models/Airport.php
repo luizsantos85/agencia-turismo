@@ -24,4 +24,12 @@ class Airport extends Model
     {
         return $this->belongsTo(City::class);
     }
+
+
+    public function search($cityId, $request, $totalPage)
+    {
+        return $this->where('city_id', $cityId)
+            ->where('name', 'like', "%{$request}%")
+            ->paginate($totalPage);
+    }
 }

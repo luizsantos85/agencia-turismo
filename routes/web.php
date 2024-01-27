@@ -22,7 +22,6 @@ Route::prefix('panel')->group(function(){
 
     Route::any('/states/search', [StateController::class,'search'])->name('states.search');
     Route::get('/states', [StateController::class,'index'])->name('states.index');
-
     Route::any('/states/{initials}/cities/search', [CityController::class,'search'])->name('cities.search');
     Route::get('/states/{initials}/cities', [CityController::class,'index'])->name('cities.index');
 
@@ -31,6 +30,7 @@ Route::prefix('panel')->group(function(){
 
 
     Route::resource('city/{id}/airports', AirportController::class);
+    Route::any('city/{id}/airports/search', [AirportController::class, 'search'])->name('airports.search');
 
 });
 

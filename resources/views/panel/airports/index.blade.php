@@ -29,10 +29,10 @@
 
     <div class="content-din bg-white">
         <div class="form-search">
-            {{-- {!! Form::open(['route' => 'brands.search','class' => 'form form-inline']) !!}
-            {!! Form::text('name', null, ['class'=> 'form-control', 'placeholder' => 'Nome...'])!!}
-            <button class="btn btn-default">Pesquisar</button>
-            {!! Form::close() !!} --}}
+            {!! Form::open(['route' => ['airports.search',$city->id],'class' => 'form form-inline']) !!}
+                {!! Form::text('name', null, ['class'=> 'form-control', 'placeholder' => 'Nome do aeroporto...'])!!}
+                <button class="btn btn-default">Pesquisar</button>
+            {!! Form::close() !!}
         </div>
 
 
@@ -57,16 +57,20 @@
 
             </tr>
             @empty
-            <tr>
-                <td colspan="4"><strong>Nenhum Aeroporto cadastrado.</strong> </td>
-            </tr>
+                <tr>
+                    @if(isset($dataForm))
+                        <td colspan="4"><strong>Nenhum Aeroporto encontrado com esse nome.</strong> </td>
+                    @else
+                        <td colspan="4"><strong>Nenhum Aeroporto cadastrado.</strong> </td>
+                    @endif
+                </tr>
             @endforelse
 
         </table>
         @if (isset($dataForm))
-        {!! $airports->appends($dataForm)->links('pagination::bootstrap-4') !!}
+            {!! $airports->appends($dataForm)->links('pagination::bootstrap-4') !!}
         @else
-        {!! $airports->links('pagination::bootstrap-4') !!}
+            {!! $airports->links('pagination::bootstrap-4') !!}
         @endif
     </div>
     <!--Content Dinâmico-->

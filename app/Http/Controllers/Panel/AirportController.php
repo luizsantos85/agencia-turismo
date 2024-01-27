@@ -78,12 +78,19 @@ class AirportController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $cityId, $airportId
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($cityId, $airportId)
     {
-        //
+        $airport = $this->airport->with('city')->findOrFail($airportId);
+        $city = $airport->city;
+
+        if (!$airport) return redirect()->back()->with('error', 'Aeroporto não encontrado.');
+
+        $title = "Detalhes do {$airport->name}";
+
+        return view('panel.airports.show', compact('city', 'title', 'airport'));
     }
 
     /**
@@ -135,8 +142,32 @@ class AirportController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($cityId, $airportId)
     {
-        //
+        $airport = $this->airport->find($airportId);
+
+        if (!$airport)
+            return redirect()->back()->with('error', 'Id não encontrado.');
+
+        $airport->delete();
+
+        return redirect()->route('airports.index', $cityId)->with('success', 'Marca deletada com sucesso.');
+    }
+
+
+    /**
+     * Search item
+     *
+     * @param string $data
+     * @return View
+     */
+    public function search($cityId, Request $request)
+    {
+        $dataForm = $request->except('_token');
+        $city = $this->city->find($cityId);
+        $airports = $this->airport->search($cityId, $request->name, $this->totalPage);
+        $title = "Buscou filtro para: {$request->name}";
+
+        return view('panel.airports.index',  compact('title','city', 'airports', 'dataForm'));
     }
 }
