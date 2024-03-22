@@ -21,6 +21,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'image',
+        'is_admin'
     ];
 
     /**
@@ -41,4 +43,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    public function search($data, $totalPage)
+    {
+        return $this->where('name', 'like', "%{$data}%")->paginate($totalPage);
+    }
 }

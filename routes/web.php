@@ -9,6 +9,7 @@ use App\Http\Controllers\Panel\CityController;
 use App\Http\Controllers\Panel\FlightController;
 use App\Http\Controllers\Panel\PlaneController;
 use App\Http\Controllers\Panel\StateController;
+use App\Http\Controllers\Panel\UserController;
 
 Route::prefix('panel')->group(function(){
     Route::get('/', [PanelController::class, 'index'])->name('panel.index');
@@ -32,6 +33,8 @@ Route::prefix('panel')->group(function(){
     Route::resource('city/{id}/airports', AirportController::class);
     Route::any('city/{id}/airports/search', [AirportController::class, 'search'])->name('airports.search');
 
+    Route::resource('users', UserController::class);
+    Route::any('/users/search', [UserController::class, 'search'])->name('users.search');
 });
 
 Route::get('/promocoes', [SiteController::class,'promotions'])->name('promotions');
