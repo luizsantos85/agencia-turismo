@@ -51,13 +51,7 @@ class UserController extends Controller
      */
     public function store(StoreUpdateUserFormRequest $request)
     {
-        $dataForm = $request->all();
-
-        // $dataForm['password'] = Hash::make($dataForm['password']);
-        $dataForm['password'] = bcrypt($dataForm['password']);
-        $dataForm['is_admin'] = isset($dataForm['is_admin']) ? 1 : 0;
-
-        if ($this->user->create($dataForm))
+        if ($this->user->newUser($request))
             return redirect()->route('users.index')
                 ->with('success', 'Cadastro realizado com sucesso.');
         else
@@ -115,15 +109,7 @@ class UserController extends Controller
         if (!$user)
             return redirect()->back()->with('error', 'Id não encontrado.');
 
-        $dataForm = $request->all();
-        $dataForm['is_admin'] = isset($dataForm['is_admin']) ? 1 : 0;
-
-        if(isset($dataForm['password']) && $dataForm['password'] != '')
-            $dataForm['password'] = bcrypt($dataForm['password']);
-        else
-            unset($dataForm['password']);
-
-        $update = $user->update($dataForm);
+        $update = $user->updateUser($request);
 
         if ($update)
             return redirect()->route('users.index')

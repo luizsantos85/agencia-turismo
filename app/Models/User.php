@@ -22,7 +22,7 @@ class User extends Authenticatable
         'email',
         'password',
         'image',
-        'is_admin'
+        // 'is_admin'
     ];
 
     /**
@@ -43,6 +43,30 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function newUser($request)
+    {
+        $this->name = $request->name;
+        $this->email = $request->email;
+        $this->password = bcrypt($request->password);
+        $this->is_admin = $request->is_admin ? 1 : 0;
+
+        return $this->save();
+    }
+
+    public function updateUser($request)
+    {
+        $this->name = $request->name;
+        $this->email = $request->email;
+
+        if($request->password && $request->password != ''){
+            $this->password = bcrypt($request->password);
+        }
+
+        $this->is_admin = $request->is_admin ? 1 : 0;
+
+        return $this->save();
+    }
 
 
     public function search($data, $totalPage)
