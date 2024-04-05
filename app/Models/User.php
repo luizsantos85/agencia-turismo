@@ -68,9 +68,14 @@ class User extends Authenticatable
         return $this->save();
     }
 
-
     public function search($data, $totalPage)
     {
         return $this->where('name', 'like', "%{$data}%")->paginate($totalPage);
     }
+
+    public function reserves()
+    {
+        return $this->hasMany(Reserve::class, 'user_id');
+    }
+
 }

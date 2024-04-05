@@ -57,7 +57,7 @@
             </tr>
             @empty
             <tr>
-                <td>Nenhuma marca cadastrada.</td>
+                <td colspan="4">Nenhuma usuário cadastrado.</td>
             </tr>
             @endforelse
 

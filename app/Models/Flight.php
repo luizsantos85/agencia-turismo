@@ -96,6 +96,11 @@ class Flight extends Model
         return $flights;
     }
 
+    public function reserves()
+    {
+        return $this->hasMany(Reserve::class, 'flight_id');
+    }
+
 
     //Mutator
     // public function getDateAttribute($value)

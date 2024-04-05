@@ -5,9 +5,8 @@
     <title>{{$title ?? 'Laravel Agência Turismo'}}</title>
 
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <!--Fonts-->
     <link rel="stylesheet" href="{{url('assets/panel/css/font-awesome.min.css')}}">
 
@@ -61,6 +60,12 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{route('reserves.index')}}">
+                        <i class="fa fa-calendar"></i>
+                        Reservas
+                    </a>
+                </li>
+                <li>
                     <a href="{{route('users.index')}}">
                         <i class="fa fa-user"></i>
                         Usuários
@@ -79,7 +84,8 @@
             <div class="dropdown user-dash">
                 <div class="dropdown-toggle" id="dropDownCuston" data-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="true">
-                    <img src="{{url('assets/panel/imgs/user-carlos-ferreira.png')}}" alt="Carlos Ferreira" class="user-dashboard img-circle">
+                    <img src="{{url('assets/panel/imgs/user-carlos-ferreira.png')}}" alt="Carlos Ferreira"
+                        class="user-dashboard img-circle">
                     <p class="user-name">Nome User</p>
                     <span class="caret"></span>
                 </div>
@@ -108,9 +114,13 @@
     <script src="{{url('assets/panel/js/jquery-3.1.1.min.js')}}"></script>
 
     <!-- jS Bootstrap -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous">
+    </script>
+    @stack('scripts')
 </body>
 
 </html>

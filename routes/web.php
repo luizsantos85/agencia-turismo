@@ -8,6 +8,7 @@ use App\Http\Controllers\Panel\BrandController;
 use App\Http\Controllers\Panel\CityController;
 use App\Http\Controllers\Panel\FlightController;
 use App\Http\Controllers\Panel\PlaneController;
+use App\Http\Controllers\Panel\ReserveController;
 use App\Http\Controllers\Panel\StateController;
 use App\Http\Controllers\Panel\UserController;
 
@@ -35,6 +36,9 @@ Route::prefix('panel')->group(function(){
 
     Route::resource('users', UserController::class);
     Route::any('/users/search', [UserController::class, 'search'])->name('users.search');
+
+    Route::resource('reserves', ReserveController::class,['except' => ['show', 'destroy']]);
+    Route::post('reserves/obter/voo', [FlightController::class, 'obterVoo'])->name('obterVoo');
 });
 
 Route::get('/promocoes', [SiteController::class,'promotions'])->name('promotions');

@@ -209,4 +209,20 @@ class FlightController extends Controller
 
         return view('panel.flights.index', compact('title', 'flights', 'dataForm',  'airports'));
     }
+
+
+    /**
+     * Undocumented function
+     *
+     * @param [date] $dataVoo
+     * @return json
+     */
+    public function obterVoo(Request $request)
+    {
+        $flights = Flight::with('destination')
+            ->whereDate('date', $request->dataVoo)
+            ->get();
+
+        return $flights;
+    }
 }
