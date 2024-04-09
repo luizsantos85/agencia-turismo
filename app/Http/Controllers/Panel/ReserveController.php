@@ -75,11 +75,19 @@ class ReserveController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\View
      */
     public function edit($id)
     {
-        //
+        $title = 'Edição de reservas de passagens';
+        $reserve = $this->reserve->with(['user', 'flight.destination'])->where('id',$id)->first();
+
+        $user = $reserve->user;
+        $flight = $reserve->flight;
+
+        $status = $this->reserve->status();
+
+        return view('panel.reserves.edit',  compact('title', 'reserve', 'status','user','flight'));
     }
 
     /**
@@ -87,10 +95,31 @@ class ReserveController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\View
      */
     public function update(Request $request, $id)
     {
-        //
+        $reserve = $this->reserve->find($id);
+
+        if ($reserve->changeStatus($request->status)) {
+            return redirect()
+                ->route('reserves.index')
+                ->with('success', 'Status alterado com sucesso.');
+        } else {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('error', 'Falha ao editar.');
+        }
     }
+
+
+    // public function search(Request $request)
+    // {
+    //     $dataForm = $request->except('_token');
+    //     $reserves = $this->reserve->search($request->name, $this->totalPage);
+    //     $title = "Buscou filtro para: {$request->name}";
+
+    //     return view('panel.reserves.index',  compact('title', 'reserves', 'dataForm'));
+    // }
 }

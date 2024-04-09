@@ -39,6 +39,8 @@ Route::prefix('panel')->group(function(){
 
     Route::resource('reserves', ReserveController::class,['except' => ['show', 'destroy']]);
     Route::post('reserves/obter/voo', [FlightController::class, 'obterVoo'])->name('obterVoo');
+    Route::any('/reserves/search', [ReserveController::class, 'search'])->name('reserves.search');
+
 });
 
 Route::get('/promocoes', [SiteController::class,'promotions'])->name('promotions');

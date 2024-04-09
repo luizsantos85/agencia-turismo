@@ -23,13 +23,13 @@
     @include('panel.layouts.alerts')
 
     <div class="content-din bg-white">
-        {{-- <div class="form-search">
+        <div class="form-search">
             <form action="{{route('reserves.search')}}" method="post" class="form form-inline">
                 @csrf
                 <input type="text" name="name" id="name" class="form-control" placeholder="Nome...">
                 <button class="btn btn-default">Pesquisar</button>
             </form>
-        </div> --}}
+        </div>
 
         <table class="table table-striped ">
             <tr>
@@ -46,7 +46,8 @@
                 <td>{{$reserve->user->name}}</td>
                 <td>{{$reserve->flight->id}}</td>
                 <td>{{$reserve->flight->destination->name}}</td>
-                <td>{{ date('d/m/Y', strtotime($reserve->date_reserved))}}</td>
+                {{-- <td>{{ date('d/m/Y', strtotime($reserve->date_reserved))}}</td> --}}
+                <td>{{ formatDateAndTime($reserve->date_reserved) }}</td>
                 <td>{{$reserve->status($reserve->status)}}</td>
                 <td>
                     <a href="{{route('reserves.edit', $reserve->id)}}" class="btn btn-sm btn-warning">Editar</a>

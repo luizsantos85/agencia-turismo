@@ -32,7 +32,7 @@ class Reserve extends Model
             'reserved' => 'Reservado',
             'canceled' => 'Cancelado',
             'paid' => 'Pago',
-            'concluded' => 'Cancelado',
+            'conclued' => 'Concluído',
         ];
 
         if($option){
@@ -41,4 +41,15 @@ class Reserve extends Model
 
         return $statusAvialable;
     }
+
+    public function changeStatus($newStatus)
+    {
+        $this->status = $newStatus;
+        return $this->save();
+    }
+
+    // public function search($data, $totalPage)
+    // {
+    //     return $this->where('name', 'like', "%{$data}%")->paginate($totalPage);
+    // }
 }
