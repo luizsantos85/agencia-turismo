@@ -11,7 +11,7 @@ use App\Models\User;
 class ReserveController extends Controller
 {
     private $reserve;
-    protected $totalPage = 30;
+    protected $totalPage = 15;
 
     public function __construct(Reserve $reserve)
     {
@@ -28,8 +28,9 @@ class ReserveController extends Controller
         $title = 'Reservas de passagens aéreas';
 
         $reserves = $this->reserve->with(['user', 'flight.destination'])->paginate($this->totalPage);
+        $status = $this->reserve->status();
 
-        return view('panel.reserves.index',  compact('title', 'reserves'));
+        return view('panel.reserves.index',  compact('title', 'reserves','status'));
     }
 
     /**
@@ -114,12 +115,25 @@ class ReserveController extends Controller
     }
 
 
-    // public function search(Request $request)
-    // {
-    //     $dataForm = $request->except('_token');
-    //     $reserves = $this->reserve->search($request->name, $this->totalPage);
-    //     $title = "Buscou filtro para: {$request->name}";
+    public function search(Request $request)
+    {
+        $dataForm = $request->except('_token');
+        $reserves = $this->reserve->search($dataForm, $this->totalPage);
+        $status = $this->reserve->status();
 
-    //     return view('panel.reserves.index',  compact('title', 'reserves', 'dataForm'));
-    // }
+        // Mapear os valores dos campos de pesquisa para retornar no titulo
+        $serchValues = array_map(function ($key, $value) use ($dataForm) {
+            if ($key == 'date_flight' && !empty($dataForm['date_flight'])) {
+                $value = date('d/m/Y', strtotime($value));
+            }
+            return $value ? "{$value}" : null;
+        }, array_keys($dataForm), $dataForm);
+        // Filtrar valores não nulos
+        $filteredValues = array_filter($serchValues);
+        // Concatenar os valores dos campos em uma string
+        $searchString = implode(', ', $filteredValues);
+        $title = "Resultados da pesquisa para: {$searchString}";
+
+        return view('panel.reserves.index',  compact('title', 'reserves', 'dataForm','status'));
+    }
 }

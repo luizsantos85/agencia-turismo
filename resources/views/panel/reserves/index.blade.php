@@ -26,7 +26,15 @@
         <div class="form-search">
             <form action="{{route('reserves.search')}}" method="post" class="form form-inline">
                 @csrf
-                <input type="text" name="name" id="name" class="form-control" placeholder="Nome...">
+                <input type="text" name="name_user" class="form-control" placeholder="Nome de usuário...">
+                <input type="text" name="id_voo" class="form-control ml-1" placeholder="Id do voo...">
+                <input type="date" name="date_flight" class="form-control ml-1" placeholder="Data de partida...">
+                <select name="status" id="" class="form-control ml-1">
+                    <option value="" disabled selected>Selecione...</option>
+                    @foreach ($status as $mode => $name)
+                        <option value="{{$mode}}">{{$name}}</option>
+                    @endforeach
+                </select>
                 <button class="btn btn-default">Pesquisar</button>
             </form>
         </div>
